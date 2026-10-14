@@ -1,5 +1,7 @@
 # Evidence Retrieval Bench
 
+[![Reproduction checks](https://github.com/aarnavbhat23/evidence-retrieval-bench/actions/workflows/retrieval.yml/badge.svg)](https://github.com/aarnavbhat23/evidence-retrieval-bench/actions/workflows/retrieval.yml)
+
 Finding a relevant abstract is easier than correctly verifying a scientific claim.
 
 This repository builds a **5,183-abstract** index from SciFact, trains a contrastive projection on frozen MiniLM embeddings, compares four retrieval methods, and evaluates an NLI verifier on **all 300 official development claims**. It measures correct citations alongside correct verdicts, so a persuasive but unsupported answer cannot count as a success.
