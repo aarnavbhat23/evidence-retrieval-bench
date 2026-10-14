@@ -1,0 +1,227 @@
+{
+  "corpus_documents": 5183,
+  "train_claims": 809,
+  "dev_claims": 300,
+  "projection_train_pairs": 415,
+  "projection_validation_pairs": 90,
+  "selected_epoch": 25,
+  "retrieval": {
+    "tfidf": {
+      "any_evidence_recall_at_1": 0.526595744680851,
+      "any_evidence_recall_at_5": 0.7925531914893617,
+      "any_evidence_recall_at_10": 0.8351063829787234,
+      "any_evidence_recall_at_50": 0.9521276595744681
+    },
+    "frozen_dense": {
+      "any_evidence_recall_at_1": 0.6276595744680851,
+      "any_evidence_recall_at_5": 0.8776595744680851,
+      "any_evidence_recall_at_10": 0.9202127659574468,
+      "any_evidence_recall_at_50": 0.9840425531914894
+    },
+    "trained_projection": {
+      "any_evidence_recall_at_1": 0.6968085106382979,
+      "any_evidence_recall_at_5": 0.8723404255319149,
+      "any_evidence_recall_at_10": 0.9095744680851063,
+      "any_evidence_recall_at_50": 0.9574468085106383
+    },
+    "hybrid_rrf": {
+      "any_evidence_recall_at_1": 0.6436170212765957,
+      "any_evidence_recall_at_5": 0.898936170212766,
+      "any_evidence_recall_at_10": 0.9521276595744681,
+      "any_evidence_recall_at_50": 0.9893617021276596
+    }
+  },
+  "encoder_note": "Frozen MiniLM may have seen scientific text in upstream pretraining; no contamination-free claim.",
+  "verification": {
+    "nli_model": "cross-encoder/nli-MiniLM2-L6-H768",
+    "revision": "b95119ce93d3e065de6214e38cd4a97b0f2f2c6d",
+    "truncated_pairs": 0,
+    "accuracy": 0.4666666666666667,
+    "macro_f1": 0.4404539579844143,
+    "development_risk_coverage": [
+      {
+        "threshold": 0.0,
+        "accepted": 124,
+        "coverage": 0.41333333333333333,
+        "label_precision": 0.4838709677419355,
+        "label_and_citation_precision": 0.33064516129032256
+      },
+      {
+        "threshold": 0.5,
+        "accepted": 120,
+        "coverage": 0.4,
+        "label_precision": 0.475,
+        "label_and_citation_precision": 0.325
+      },
+      {
+        "threshold": 0.6,
+        "accepted": 104,
+        "coverage": 0.3466666666666667,
+        "label_precision": 0.4807692307692308,
+        "label_and_citation_precision": 0.34615384615384615
+      },
+      {
+        "threshold": 0.7,
+        "accepted": 83,
+        "coverage": 0.27666666666666667,
+        "label_precision": 0.5421686746987951,
+        "label_and_citation_precision": 0.3855421686746988
+      },
+      {
+        "threshold": 0.8,
+        "accepted": 64,
+        "coverage": 0.21333333333333335,
+        "label_precision": 0.578125,
+        "label_and_citation_precision": 0.4375
+      },
+      {
+        "threshold": 0.9,
+        "accepted": 45,
+        "coverage": 0.15,
+        "label_precision": 0.5777777777777777,
+        "label_and_citation_precision": 0.4222222222222222
+      },
+      {
+        "threshold": 0.95,
+        "accepted": 28,
+        "coverage": 0.09333333333333334,
+        "label_precision": 0.6071428571428571,
+        "label_and_citation_precision": 0.42857142857142855
+      },
+      {
+        "threshold": 0.99,
+        "accepted": 7,
+        "coverage": 0.023333333333333334,
+        "label_precision": 0.42857142857142855,
+        "label_and_citation_precision": 0.2857142857142857
+      },
+      {
+        "threshold": 1.0,
+        "accepted": 0,
+        "coverage": 0.0,
+        "label_precision": null,
+        "label_and_citation_precision": null
+      }
+    ],
+    "calibration_risk_coverage": [
+      {
+        "threshold": 0.0,
+        "accepted": 45,
+        "coverage": 0.5,
+        "label_precision": 0.7777777777777778,
+        "label_and_citation_precision": 0.6444444444444445
+      },
+      {
+        "threshold": 0.5,
+        "accepted": 45,
+        "coverage": 0.5,
+        "label_precision": 0.7777777777777778,
+        "label_and_citation_precision": 0.6444444444444445
+      },
+      {
+        "threshold": 0.6,
+        "accepted": 41,
+        "coverage": 0.45555555555555555,
+        "label_precision": 0.7804878048780488,
+        "label_and_citation_precision": 0.6341463414634146
+      },
+      {
+        "threshold": 0.7,
+        "accepted": 37,
+        "coverage": 0.4111111111111111,
+        "label_precision": 0.8108108108108109,
+        "label_and_citation_precision": 0.6486486486486487
+      },
+      {
+        "threshold": 0.8,
+        "accepted": 30,
+        "coverage": 0.3333333333333333,
+        "label_precision": 0.8333333333333334,
+        "label_and_citation_precision": 0.7
+      },
+      {
+        "threshold": 0.9,
+        "accepted": 19,
+        "coverage": 0.2111111111111111,
+        "label_precision": 1.0,
+        "label_and_citation_precision": 0.7894736842105263
+      },
+      {
+        "threshold": 0.95,
+        "accepted": 10,
+        "coverage": 0.1111111111111111,
+        "label_precision": 1.0,
+        "label_and_citation_precision": 0.7
+      },
+      {
+        "threshold": 0.99,
+        "accepted": 2,
+        "coverage": 0.022222222222222223,
+        "label_precision": 1.0,
+        "label_and_citation_precision": 0.5
+      },
+      {
+        "threshold": 1.0,
+        "accepted": 0,
+        "coverage": 0.0,
+        "label_precision": null,
+        "label_and_citation_precision": null
+      }
+    ],
+    "chosen_policy": {
+      "threshold": 1.0,
+      "accepted": 0,
+      "coverage": 0.0,
+      "label_precision": null,
+      "label_and_citation_precision": null
+    },
+    "policy_note": "Validation-selected empirical threshold, not a statistical safety guarantee. Labels and citations must both be correct."
+  },
+  "retrieval_training_document_strata": {
+    "tfidf": {
+      "some_gold_doc_seen_in_projection_training": {
+        "claims": 87,
+        "recall_at_5": 0.7931034482758621
+      },
+      "no_gold_doc_seen_in_projection_training": {
+        "claims": 101,
+        "recall_at_5": 0.7920792079207921
+      }
+    },
+    "frozen_dense": {
+      "some_gold_doc_seen_in_projection_training": {
+        "claims": 87,
+        "recall_at_5": 0.896551724137931
+      },
+      "no_gold_doc_seen_in_projection_training": {
+        "claims": 101,
+        "recall_at_5": 0.8613861386138614
+      }
+    },
+    "trained_projection": {
+      "some_gold_doc_seen_in_projection_training": {
+        "claims": 87,
+        "recall_at_5": 0.9655172413793104
+      },
+      "no_gold_doc_seen_in_projection_training": {
+        "claims": 101,
+        "recall_at_5": 0.7920792079207921
+      }
+    },
+    "hybrid_rrf": {
+      "some_gold_doc_seen_in_projection_training": {
+        "claims": 87,
+        "recall_at_5": 0.9310344827586207
+      },
+      "no_gold_doc_seen_in_projection_training": {
+        "claims": 101,
+        "recall_at_5": 0.8712871287128713
+      }
+    }
+  },
+  "claim_overlap_diagnostic": {
+    "exact_train_dev_text_matches": 2,
+    "dev_claims_with_lexical_cosine_at_least_0_9": 13,
+    "note": "Diagnostic, not deduplication. Official SciFact development set can contain related scientific propositions. This is not an independent new-paper test."
+  }
+}

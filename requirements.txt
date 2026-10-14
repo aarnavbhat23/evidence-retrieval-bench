@@ -1,0 +1,7 @@
+numpy==2.4.4
+pandas==3.0.6
+scikit-learn==1.8.0
+torch==2.14.1
+transformers==5.19.0
+matplotlib==3.11.2
+truststore==0.10.4

@@ -1,0 +1,10 @@
+{
+  "encoder": "sentence-transformers/all-MiniLM-L6-v2",
+  "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "max_tokens": 256,
+  "pooling": "L2-normalized mean of attention-masked final states, including special tokens (model-card recipe)",
+  "texts": 6292,
+  "truncated_texts": 3681,
+  "data_sha256": "11c621288d41ac144d29b13b0f8503b3820b7d6e8b1f6ff24dff335c196d76be",
+  "embedding_sha256": "5231049f633a8b715c3b5276767ef9061ac169a3eac5eba4878d85f1aece181e"
+}
