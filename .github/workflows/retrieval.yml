@@ -14,3 +14,5 @@ jobs:
       - run: python -m pip install -r requirements.txt
       - run: python -m unittest discover -s tests -v
       - run: python replay.py
+      - run: python fetch.py
+      - run: python replay_v2.py

@@ -12,3 +12,5 @@ Question: which verifiable citation errors can a reproducible audit detect, and 
 6. Any deployed-system outcome requires actual accessible report inputs and reviewable judgments. If report/export access or original expert-label files are unavailable, record the limitation and publish the instrument/review workflow without claiming to have independently measured Kosmos accuracy.
 
 Outstanding independent validation: external blinded annotators, agreement statistics, another annotated corpus, and accessible real-system outputs. A self-graded adapter alone does not satisfy these.
+
+Implementation clarification: corpus-level loss retains the closed public index as negatives. Claim/reference groups are disjoint, but held-out document vectors can participate as negatives in fitting. The unseen-reference diagnostic is not unseen-document representation transfer. This clarification was added after the run; no result-based tuning was performed.

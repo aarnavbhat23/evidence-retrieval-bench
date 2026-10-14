@@ -1,0 +1,11 @@
+{
+  "checked_at_utc": "2026-10-14T23:15:50Z",
+  "report_url": "https://platform.edisonscientific.com/kosmos/c4bdef64-5e9b-43b9-a365-592dd1ed7587",
+  "resolved_url": "https://platform.edisonscientific.com/",
+  "observation": "Publisher page reported a service outage.",
+  "reports_probed": 1,
+  "independent_accuracy_measurement_completed": false,
+  "paid_runs": 0,
+  "human_reviews_completed": 0,
+  "scope": "One access probe, not a systematic availability sample; unavailable content is not a scientific error."
+}

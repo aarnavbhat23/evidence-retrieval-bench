@@ -1,0 +1,38 @@
+{
+  "independent_source_claims": 188,
+  "paired_variants": 1128,
+  "variants": {
+    "altered_quote": {
+      "cases": 188,
+      "structural_flag_fraction": 1.0,
+      "annotated_citation_match_fraction": 1.0
+    },
+    "consistent_wrong_source": {
+      "cases": 188,
+      "structural_flag_fraction": 0.0,
+      "annotated_citation_match_fraction": 0.0
+    },
+    "hash_mismatch": {
+      "cases": 188,
+      "structural_flag_fraction": 1.0,
+      "annotated_citation_match_fraction": 1.0
+    },
+    "invalid_index": {
+      "cases": 188,
+      "structural_flag_fraction": 1.0,
+      "annotated_citation_match_fraction": 1.0
+    },
+    "missing_citation": {
+      "cases": 188,
+      "structural_flag_fraction": 1.0,
+      "annotated_citation_match_fraction": 0.0
+    },
+    "original": {
+      "cases": 188,
+      "structural_flag_fraction": 0.0,
+      "annotated_citation_match_fraction": 1.0
+    }
+  },
+  "human_review_status": "unreviewed",
+  "note": "Controlled edits, not a deployed-system error distribution. Semantic entailment is never established by structural consistency."
+}

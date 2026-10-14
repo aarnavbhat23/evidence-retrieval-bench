@@ -1,0 +1,247 @@
+{
+  "protocol": "docs/EXTENSION_PROTOCOL.md",
+  "training_claims_by_split": {
+    "train": {
+      "claims": 493,
+      "annotated": 313,
+      "insufficient": 180
+    },
+    "validation": {
+      "claims": 161,
+      "annotated": 103,
+      "insufficient": 58
+    },
+    "calibration": {
+      "claims": 155,
+      "annotated": 89,
+      "insufficient": 66
+    }
+  },
+  "components": 490,
+  "all_reference_group_overlap": 0,
+  "projection_positive_counts": {
+    "train": 313,
+    "validation": 103
+  },
+  "selected_epoch": 1,
+  "retrieval": {
+    "tfidf": {
+      "official_annotated_dev": {
+        "claims": 188,
+        "recall_at_1": 0.526595744680851,
+        "recall_at_5": 0.7925531914893617,
+        "recall_at_10": 0.8351063829787234,
+        "recall_at_50": 0.9521276595744681
+      },
+      "unseen_gold_document_and_no_exact_text_duplicate": {
+        "claims": 117,
+        "recall_at_1": 0.5128205128205128,
+        "recall_at_5": 0.7521367521367521,
+        "recall_at_10": 0.7863247863247863,
+        "recall_at_50": 0.9487179487179487
+      }
+    },
+    "frozen_dense": {
+      "official_annotated_dev": {
+        "claims": 188,
+        "recall_at_1": 0.6276595744680851,
+        "recall_at_5": 0.8776595744680851,
+        "recall_at_10": 0.9202127659574468,
+        "recall_at_50": 0.9840425531914894
+      },
+      "unseen_gold_document_and_no_exact_text_duplicate": {
+        "claims": 117,
+        "recall_at_1": 0.5726495726495726,
+        "recall_at_5": 0.8461538461538461,
+        "recall_at_10": 0.8974358974358975,
+        "recall_at_50": 0.9829059829059829
+      }
+    },
+    "trained_projection": {
+      "official_annotated_dev": {
+        "claims": 188,
+        "recall_at_1": 0.6063829787234043,
+        "recall_at_5": 0.8297872340425532,
+        "recall_at_10": 0.8723404255319149,
+        "recall_at_50": 0.9574468085106383
+      },
+      "unseen_gold_document_and_no_exact_text_duplicate": {
+        "claims": 117,
+        "recall_at_1": 0.5299145299145299,
+        "recall_at_5": 0.7692307692307693,
+        "recall_at_10": 0.8290598290598291,
+        "recall_at_50": 0.9401709401709402
+      }
+    },
+    "hybrid_rrf": {
+      "official_annotated_dev": {
+        "claims": 188,
+        "recall_at_1": 0.6276595744680851,
+        "recall_at_5": 0.8617021276595744,
+        "recall_at_10": 0.9308510638297872,
+        "recall_at_50": 0.9840425531914894
+      },
+      "unseen_gold_document_and_no_exact_text_duplicate": {
+        "claims": 117,
+        "recall_at_1": 0.5726495726495726,
+        "recall_at_5": 0.811965811965812,
+        "recall_at_10": 0.8974358974358975,
+        "recall_at_50": 0.9743589743589743
+      }
+    }
+  },
+  "verification": {
+    "nli_model": "cross-encoder/nli-MiniLM2-L6-H768",
+    "revision": "b95119ce93d3e065de6214e38cd4a97b0f2f2c6d",
+    "dev_claims": 300,
+    "truncated_dev_pairs": 0,
+    "truncated_calibration_pairs": 0,
+    "accuracy": 0.46,
+    "macro_f1": 0.4383754834452891,
+    "calibration_risk_coverage": [
+      {
+        "threshold": 0.0,
+        "accepted": 66,
+        "coverage": 0.4258064516129032,
+        "label_precision": 0.5151515151515151,
+        "label_and_citation_precision": 0.4393939393939394
+      },
+      {
+        "threshold": 0.5,
+        "accepted": 63,
+        "coverage": 0.4064516129032258,
+        "label_precision": 0.5238095238095238,
+        "label_and_citation_precision": 0.4444444444444444
+      },
+      {
+        "threshold": 0.6,
+        "accepted": 59,
+        "coverage": 0.38064516129032255,
+        "label_precision": 0.5423728813559322,
+        "label_and_citation_precision": 0.4576271186440678
+      },
+      {
+        "threshold": 0.7,
+        "accepted": 50,
+        "coverage": 0.3225806451612903,
+        "label_precision": 0.56,
+        "label_and_citation_precision": 0.48
+      },
+      {
+        "threshold": 0.8,
+        "accepted": 45,
+        "coverage": 0.2903225806451613,
+        "label_precision": 0.5555555555555556,
+        "label_and_citation_precision": 0.4888888888888889
+      },
+      {
+        "threshold": 0.9,
+        "accepted": 25,
+        "coverage": 0.16129032258064516,
+        "label_precision": 0.64,
+        "label_and_citation_precision": 0.56
+      },
+      {
+        "threshold": 0.95,
+        "accepted": 18,
+        "coverage": 0.11612903225806452,
+        "label_precision": 0.6111111111111112,
+        "label_and_citation_precision": 0.6111111111111112
+      },
+      {
+        "threshold": 0.99,
+        "accepted": 5,
+        "coverage": 0.03225806451612903,
+        "label_precision": 0.4,
+        "label_and_citation_precision": 0.4
+      },
+      {
+        "threshold": 1.0,
+        "accepted": 0,
+        "coverage": 0.0,
+        "label_precision": null,
+        "label_and_citation_precision": null
+      }
+    ],
+    "development_risk_coverage": [
+      {
+        "threshold": 0.0,
+        "accepted": 131,
+        "coverage": 0.43666666666666665,
+        "label_precision": 0.4732824427480916,
+        "label_and_citation_precision": 0.32061068702290074
+      },
+      {
+        "threshold": 0.5,
+        "accepted": 127,
+        "coverage": 0.42333333333333334,
+        "label_precision": 0.4645669291338583,
+        "label_and_citation_precision": 0.31496062992125984
+      },
+      {
+        "threshold": 0.6,
+        "accepted": 109,
+        "coverage": 0.36333333333333334,
+        "label_precision": 0.46788990825688076,
+        "label_and_citation_precision": 0.3394495412844037
+      },
+      {
+        "threshold": 0.7,
+        "accepted": 89,
+        "coverage": 0.2966666666666667,
+        "label_precision": 0.5168539325842697,
+        "label_and_citation_precision": 0.3707865168539326
+      },
+      {
+        "threshold": 0.8,
+        "accepted": 70,
+        "coverage": 0.23333333333333334,
+        "label_precision": 0.5571428571428572,
+        "label_and_citation_precision": 0.4142857142857143
+      },
+      {
+        "threshold": 0.9,
+        "accepted": 49,
+        "coverage": 0.16333333333333333,
+        "label_precision": 0.5714285714285714,
+        "label_and_citation_precision": 0.42857142857142855
+      },
+      {
+        "threshold": 0.95,
+        "accepted": 28,
+        "coverage": 0.09333333333333334,
+        "label_precision": 0.6071428571428571,
+        "label_and_citation_precision": 0.4642857142857143
+      },
+      {
+        "threshold": 0.99,
+        "accepted": 7,
+        "coverage": 0.023333333333333334,
+        "label_precision": 0.42857142857142855,
+        "label_and_citation_precision": 0.2857142857142857
+      },
+      {
+        "threshold": 1.0,
+        "accepted": 0,
+        "coverage": 0.0,
+        "label_precision": null,
+        "label_and_citation_precision": null
+      }
+    ],
+    "chosen_policy": {
+      "threshold": 1.0,
+      "accepted": 0,
+      "coverage": 0.0,
+      "label_precision": null,
+      "label_and_citation_precision": null
+    }
+  },
+  "limitations": [
+    "Empirical policy precision is not a safety guarantee.",
+    "NEI claims are retained in calibration but have no positive retrieval training target.",
+    "Official development results are not a new independent corpus; unseen-document stratum is a diagnostic.",
+    "Frozen upstream pretraining contamination is unknown.",
+    "NLI predictions are not human ground truth.",
+    "All corpus abstracts are candidate negatives in fitting; disjoint supervision/reference groups do not imply unseen-document representations."
+  ]
+}

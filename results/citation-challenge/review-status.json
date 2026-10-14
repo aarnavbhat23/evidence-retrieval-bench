@@ -1,0 +1,11 @@
+{
+  "packet_rows": 60,
+  "completed_reviews": 0,
+  "reviewed_items": 0,
+  "reviewers": 0,
+  "judgments": {},
+  "paired_reviewer_comparisons": 0,
+  "pairwise_agreement": null,
+  "accuracy": null,
+  "accuracy_note": "No adjudicated independent reference judgments supplied. Construction labels are not semantic gold."
+}

@@ -8,7 +8,42 @@ This repository builds a **5,183-abstract** index from SciFact, trains a contras
 
 ![Retrieval recall versus verdict and citation precision](results/retrieval-verification.png)
 
-## Measured results
+## Document-group extension and citation instrument
+
+The new experiment partitions **all 809 training claims** by connected groups of every cited or annotated document: **493 train, 161 validation and 155 calibration**, with no document-reference overlap among them. Calibration includes **66 insufficient-evidence claims**. Corpus-level contrastive loss marginalizes all annotated positives rather than selecting one. Checkpoint selection and policy calibration now use separate partitions. The retrieval corpus remains shared: all abstracts, including held-out documents, participate as candidate negatives in corpus-level fitting. The disjoint boundary concerns supervised claim/reference groups, not an unseen-document representation test.
+
+![Revised retrieval and precision/coverage evaluation](results/document-disjoint-v2/comparison.png)
+
+| Method | Recall@5, official 188 evidence claims | Recall@5, 117 diagnostic claims |
+|---|---:|---:|
+| TF-IDF | 79.3% | 75.2% |
+| Frozen MiniLM | **87.8%** | **84.6%** |
+| All-positive trained projection | 83.0% | 76.9% |
+| Lexical + trained fusion | 86.2% | 81.2% |
+
+The 117-case diagnostic excludes evidence documents referenced by training claims and exact training-text duplicates. It is **not a new independent corpus**. Epoch 1 was selected by validation. The trained projection does not outperform the frozen encoder. NLI verdict accuracy is **46.0%**, macro F1 **0.438**; no calibration threshold meets the empirical 90% label-plus-citation target with ten accepted cases. The selected policy again abstains on all development claims. Better split discipline did not fix verification.
+
+The separate `citation_audit.py` accepts reports from any system using a documented JSONL contract. It checks source identity/hash, sentence indexes, missing citations and quoted text. It explicitly returns **semantic support: not assessed**. The paired challenge contains **188 expert-annotated source claims and 1,128 controlled variants**. Four constructed corruption types are detected structurally. A wrong document accompanied by a valid hash, sentence and quote passes those structural checks. Exact provenance alone cannot establish support.
+
+A **60-item blinded review packet** is prepared, with a printable HTML file, blank review sheet and [review instructions](docs/REVIEW_INSTRUCTIONS.md). **Zero human reviews have been completed.** Construction labels are withheld from the reviewer and are not semantic ground truth. Selected edits are a stress test, not an estimate of deployed-system error rates.
+
+```bash
+python fetch.py              # pinned free SciFact source; no model API
+python replay_v2.py           # split groups, trained rankings, verdict metrics, paired cases
+python experiment_v2.py --device cpu
+python citation_challenge.py
+python make_review_packet.py
+python review_packet.py results/citation-challenge/blind-review-packet.jsonl --output review-status.json
+python plot_extension.py
+# System-independent report adapter:
+python citation_audit.py reports.jsonl --catalog corpus.jsonl --output audit.jsonl
+```
+
+The derived frozen embeddings are now bundled for weight-free ranking replay and retain source/model attribution. Re-encoding them still uses the pinned free encoder. `search.py` defaults to the new projection, and still returns candidate passages rather than a generated verified answer. Use `--checkpoint results/projection.pt` to reproduce first-release search.
+
+We also attempted to access a public report linked by the Kosmos paper. The URL redirected to a publisher service-outage page. **No independent Kosmos accuracy measurement was completed**, and unavailability is not refutation or an inaccurate citation. See [deployed-system access status](docs/DEPLOYED_SYSTEM_STATUS.md). No paid job or external API query was run.
+
+## First-release results
 
 Retrieval is evaluated on the **188 development claims with annotated evidence**. The 112 claims without evidence remain in verification evaluation.
 
@@ -64,4 +99,4 @@ Scientific claim verification is an established task. Credit [SciFact / Wadden e
 
 SciFact claims and annotations retain [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); corpus abstracts retain [ODC-By 1.0](https://opendatacommons.org/licenses/by/1-0/). See [upstream license](https://github.com/allenai/scifact/blob/master/LICENSE.md). Pretrained models retain Apache 2.0; our code is MIT. Both source and model revisions are pinned. Built with AI assistance, with numbers from completed runs. There is no independent review or adoption claim.
 
-The next useful experiment is a biomedical verifier trained on a document-disjoint split, with all-positive contrastive batches, a held-out threshold calibration partition and exact rationale evaluation. Improving verification is more valuable than attaching an LLM that writes fluent answers over the same weak evidence.
+The extension implements disjoint supervised claim/reference groups, all-positive loss and separate calibration. Training a stronger biomedical verifier, evaluating exact rationales, and independent source review remain outstanding. Improving verification is more valuable than attaching an LLM that writes fluent answers over the same weak evidence.
