@@ -74,3 +74,14 @@ class CitationInstrumentTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class PortableRankingTests(unittest.TestCase):
+    def test_only_numerical_ties_are_allowed(self):
+        from retrieval import assert_score_compatible_ranking
+
+        assert_score_compatible_ranking([1.0, 0.9999999, 0.2], [1, 0])
+        with self.assertRaises(AssertionError):
+            assert_score_compatible_ranking([1.0, 0.9, 0.2], [1, 0])
+        with self.assertRaises(AssertionError):
+            assert_score_compatible_ranking([1.0, 0.9, 0.2], [0, 2])

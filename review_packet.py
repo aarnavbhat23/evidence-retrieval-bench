@@ -2,6 +2,7 @@
 
 import argparse
 import collections
+import csv
 import json
 from pathlib import Path
 
@@ -58,8 +59,11 @@ if __name__ == "__main__":
     parser.add_argument("packet", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    report = summarize(
-        [json.loads(line) for line in args.packet.read_text().splitlines()]
-    )
+    if args.packet.suffix == ".csv":
+        with args.packet.open(newline="") as handle:
+            rows = list(csv.DictReader(handle))
+    else:
+        rows = [json.loads(line) for line in args.packet.read_text().splitlines()]
+    report = summarize(rows)
     args.output.write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(report, indent=2))

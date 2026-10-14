@@ -10,6 +10,26 @@ def rank(scores, topk):
     return np.argsort(-np.asarray(scores), kind="stable")[:topk]
 
 
+def assert_score_compatible_ranking(scores, ranking, tolerance=1e-6):
+    """Verify descending scores and top-k inclusion, permitting numerical ties only."""
+    scores = np.asarray(scores)
+    indexes = np.asarray(ranking, dtype=int)
+    if (
+        len(set(indexes)) != len(indexes)
+        or (indexes < 0).any()
+        or (indexes >= len(scores)).any()
+    ):
+        raise AssertionError("Invalid or repeated ranked index")
+    if not len(indexes) or not np.isfinite(scores).all():
+        raise AssertionError("Empty or nonfinite ranking")
+    if (np.diff(scores[indexes]) > tolerance).any():
+        raise AssertionError("Ordering differs beyond numerical tolerance")
+    excluded = np.ones(len(scores), dtype=bool)
+    excluded[indexes] = False
+    if excluded.any() and scores[excluded].max() - scores[indexes].min() > tolerance:
+        raise AssertionError("Top-k inclusion differs beyond numerical tolerance")
+
+
 def reciprocal_rank_fusion(rankings, k=60):
     scores = {}
     for ranking in rankings:

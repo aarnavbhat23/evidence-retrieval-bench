@@ -9,7 +9,11 @@ from citation_challenge import build_cases
 from corpus import load_archive
 from document_partitions import partition, references
 from experiment import LABELS, retrieve, selective_metrics
-from retrieval import Projection
+from retrieval import (
+    Projection,
+    assert_score_compatible_ranking,
+    reciprocal_rank_fusion,
+)
 from review_packet import summarize
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import accuracy_score, f1_score
@@ -76,10 +80,37 @@ def main():
     regenerated = retrieve(
         dev, emb["dev"], documents, emb["documents"], vectorizer, matrix, projection
     )
-    for method, rankings in regenerated.items():
-        rows = [r for r in ledger if r["method"] == method]
-        for row, ranking in zip(rows, rankings):
-            assert row["ranked_doc_ids"] == [documents[j]["doc_id"] for j in ranking]
+    lookup = {d["doc_id"]: i for i, d in enumerate(documents)}
+    scores = {
+        "tfidf": (vectorizer.transform([c["claim"] for c in dev]) @ matrix.T).toarray(),
+        "frozen_dense": emb["dev"] @ emb["documents"].T,
+    }
+    with torch.inference_mode():
+        scores["trained_projection"] = (
+            projection(torch.tensor(emb["dev"]))
+            @ projection(torch.tensor(emb["documents"])).T
+        ).numpy()
+    released = {
+        method: [r for r in ledger if r["method"] == method] for method in regenerated
+    }
+    changed = {}
+    for method, values in scores.items():
+        for row, value in zip(released[method], values):
+            assert_score_compatible_ranking(
+                value, [lookup[d] for d in row["ranked_doc_ids"]]
+            )
+        changed[method] = sum(
+            row["ranked_doc_ids"] != [documents[j]["doc_id"] for j in ranking]
+            for row, ranking in zip(released[method], regenerated[method])
+        )
+    for lexical, trained, hybrid in zip(
+        released["tfidf"], released["trained_projection"], released["hybrid_rrf"]
+    ):
+        fused = reciprocal_rank_fusion(
+            [[lookup[d] for d in row["ranked_doc_ids"]] for row in [lexical, trained]]
+        )
+        assert hybrid["ranked_doc_ids"] == [documents[j]["doc_id"] for j in fused]
+    print("Platform rank-order differences within score tolerance:", changed)
     expected = report["verification"]
     results = read(out / "verification.jsonl")
     cal = read(out / "calibration-verification.jsonl")
