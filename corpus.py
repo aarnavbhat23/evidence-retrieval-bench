@@ -17,7 +17,7 @@ def load_archive(path):
                 for name in ['corpus','claims_train','claims_dev']]
 
 
-def embed(texts,tokenizer,model,device):
+def embed(texts,tokenizer,model,device,progress=True):
     values=[];truncated=0
     with torch.inference_mode():
         for offset in range(0,len(texts),32):
@@ -28,7 +28,7 @@ def embed(texts,tokenizer,model,device):
             inputs={k:v.to(device) for k,v in inputs.items()};hidden=model(**inputs).last_hidden_state
             mask=inputs['attention_mask'].unsqueeze(-1)
             values.extend(torch.nn.functional.normalize((hidden*mask).sum(1)/mask.sum(1),dim=1).cpu().numpy())
-            if offset%1024==0:print('encoded',offset,'/',len(texts),flush=True)
+            if progress and offset%1024==0:print('encoded',offset,'/',len(texts),flush=True)
     return np.array(values,dtype='float32'),truncated
 
 

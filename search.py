@@ -15,7 +15,7 @@ if __name__=='__main__':
     documents,_,_=load_archive('data/scifact.tar.gz');vectors=np.load('data/embeddings.npz')['documents']
     tokenizer=AutoTokenizer.from_pretrained(MODEL,revision=REVISION)
     model=AutoModel.from_pretrained(MODEL,revision=REVISION).to(args.device).eval()
-    query,_=embed([args.claim],tokenizer,model,args.device)
+    query,_=embed([args.claim],tokenizer,model,args.device,progress=False)
     projection=Projection().eval();projection.load_state_dict(torch.load('results/projection.pt',map_location='cpu',weights_only=True))
     vectorizer=TfidfVectorizer(ngram_range=(1,2),min_df=2,max_features=80000,stop_words='english')
     matrix=vectorizer.fit_transform([d['title']+' '+' '.join(d['abstract']) for d in documents])
